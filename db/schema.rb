@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_054215) do
+ActiveRecord::Schema.define(version: 2019_05_29_160705) do
 
   create_table "accessories", force: :cascade do |t|
     t.string "description"
@@ -22,30 +22,31 @@ ActiveRecord::Schema.define(version: 2019_05_29_054215) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "compatible_accessories", force: :cascade do |t|
-    t.integer "stuffed_animal_id"
+  create_table "accessories_purchase_orders", force: :cascade do |t|
     t.integer "accessory_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["accessory_id"], name: "index_compatible_accessories_on_accessory_id"
-    t.index ["stuffed_animal_id"], name: "index_compatible_accessories_on_stuffed_animal_id"
+    t.integer "purchase_order_id"
+    t.index ["accessory_id"], name: "index_accessories_purchase_orders_on_accessory_id"
+    t.index ["purchase_order_id"], name: "index_accessories_purchase_orders_on_purchase_order_id"
   end
 
-  create_table "purchase_order_items", force: :cascade do |t|
-    t.integer "purchase_order_id"
-    t.integer "quantity"
-    t.string "item_type"
-    t.integer "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_type", "item_id"], name: "index_purchase_order_items_on_item_type_and_item_id"
-    t.index ["purchase_order_id"], name: "index_purchase_order_items_on_purchase_order_id"
+  create_table "accessories_stuffed_animals", force: :cascade do |t|
+    t.integer "accessory_id"
+    t.integer "stuffed_animal_id"
+    t.index ["accessory_id"], name: "index_accessories_stuffed_animals_on_accessory_id"
+    t.index ["stuffed_animal_id"], name: "index_accessories_stuffed_animals_on_stuffed_animal_id"
   end
 
   create_table "purchase_orders", force: :cascade do |t|
     t.datetime "purchased_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "purchase_orders_stuffed_animals", force: :cascade do |t|
+    t.integer "purchase_order_id"
+    t.integer "stuffed_animal_id"
+    t.index ["purchase_order_id"], name: "index_purchase_orders_stuffed_animals_on_purchase_order_id"
+    t.index ["stuffed_animal_id"], name: "index_purchase_orders_stuffed_animals_on_stuffed_animal_id"
   end
 
   create_table "stuffed_animals", force: :cascade do |t|
