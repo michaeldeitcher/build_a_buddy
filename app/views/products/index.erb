@@ -1,0 +1,24 @@
+<h2>Stuffed Animals</h2>
+<%= form_tag '/related_purchases', method: :get do %>
+<ul>
+<%- @stuffies.each do |stuffy| %>
+    <li>
+      <%= check_box_tag("stuffed_animal_#{stuffy.id}") %>
+      <%= label_tag("stuffed_animal_#{stuffy.id}", stuffy.description) %>
+    </li>
+<%- end %>
+</ul>
+
+<h2>Accessories</h2>
+<ul>
+  <%- @accessories.each do |accessory| %>
+      <li>
+        <%= check_box_tag("accessory_#{accessory.id}") %>
+        <%= label_tag("accessory_#{accessory.id}", accessory.description + " - " + accessory.size) %>
+      </li>
+  <%- end %>
+</ul>
+
+    <%= submit_tag("Get Purchase Suggestions") %>
+
+<% end %>
