@@ -50,7 +50,7 @@ csv[2..].each do |line|
   accessory = line[4..]
   if accessory[0].present?
     product = Accessory.find_or_create_by!(description: accessory[0], size: accessory[1])
-    product.update_attributes! cost: convertToCents(stuffy[2]), sale_price: convertToCents(stuffy[3])
+    product.update_attributes! cost: convertToCents(accessory[2]), sale_price: convertToCents(accessory[3])
   end
 end
 

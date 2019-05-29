@@ -1,0 +1,24 @@
+<h2>What is your build budget?</h2>
+<%- if @budget_low %>
+    <h3 style="color: red">Budget must be higher than $<%= @stuffed_animal.sale_price / 100 %></h3>
+<% end %>
+
+<%= form_tag '/budget_builds', method: :get do %>
+    <span class="currency_symbol">$</span><%= text_field_tag 'budget' %>
+    <%= submit_tag("Get Budget Builds") %>
+<% end %>
+
+<%- if @cost %>
+    <h2>$<%= @budget / 100.00 %> will get:</h2>
+
+    <div class="budget-header">
+      <span>Company Costs</span>
+      <span>Revenue</span>
+      <span>Profit</span>
+    </div>
+    <div class="budget-build">
+      <span><%= @cost / 100.00 %></span>
+      <span><%= @revenue / 100.00 %></span>
+      <span><%= (@revenue - @cost) / 100.00 %></span>
+    </div>
+<% end %>
